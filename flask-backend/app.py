@@ -68,8 +68,18 @@ def add_mileage():
         doc_ref = db.collection("mileages").document()  # Create a new document reference
         doc_ref.set(data)  # Set the data for the document
 
-        # Return the response with the document ID
-        return jsonify({"message": "Mileage added!", "data": data, "id": doc_ref.id}), 201
+        # Format the date to include accurate clock time
+        formatted_date = data["date"].strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+        # Return the response with the document ID and formatted date
+        return jsonify({
+            "message": "Mileage added!",
+            "data": {
+                "date": formatted_date,  # Use the formatted date
+                "distance": data["distance"]
+            },
+            "id": doc_ref.id
+        }), 201
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
@@ -91,8 +101,18 @@ def add_washing_log():
         doc_ref = db.collection("washing_logs").document()  # Create a new document reference
         doc_ref.set(data)  # Set the data for the document
 
-        # Return the response with the document ID
-        return jsonify({"message": "Washing log added!", "data": data, "id": doc_ref.id}), 201
+        # Format the date to include accurate clock time
+        formatted_date = data["date"].strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+        # Return the response with the document ID and formatted date
+        return jsonify({
+            "message": "Washing log added!",
+            "data": {
+                "date": formatted_date,  # Use the formatted date
+                **data  # Include other fields from the request
+            },
+            "id": doc_ref.id
+        }), 201
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
@@ -114,8 +134,18 @@ def add_oil_change():
         doc_ref = db.collection("oil_changes").document()  # Create a new document reference
         doc_ref.set(data)  # Set the data for the document
 
-        # Return the response with the document ID
-        return jsonify({"message": "Oil change added!", "data": data, "id": doc_ref.id}), 201
+        # Format the date to include accurate clock time
+        formatted_date = data["date"].strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+        # Return the response with the document ID and formatted date
+        return jsonify({
+            "message": "Oil change added!",
+            "data": {
+                "date": formatted_date,  # Use the formatted date
+                "mileage": data["mileage"]
+            },
+            "id": doc_ref.id
+        }), 201
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
@@ -137,8 +167,19 @@ def add_trip():
         doc_ref = db.collection("trips").document()  # Create a new document reference
         doc_ref.set(data)  # Set the data for the document
 
-        # Return the response with the document ID
-        return jsonify({"message": "Trip added!", "data": data, "id": doc_ref.id}), 201
+        # Format the date to include accurate clock time
+        formatted_date = data["date"].strftime("%a, %d %b %Y %H:%M:%S GMT")
+
+        # Return the response with the document ID and formatted date
+        return jsonify({
+            "message": "Trip added!",
+            "data": {
+                "date": formatted_date,  # Use the formatted date
+                "distance": data["distance"],
+                "destination": data["destination"]
+            },
+            "id": doc_ref.id
+        }), 201
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
