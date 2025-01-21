@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# FIREBASE
+flask-backend/firebase_config/firebase-admin-sdk.json
